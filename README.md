@@ -1,9 +1,10 @@
-# anicon
-Add cover art from MAL as folder icons to your anime collection.
+# AnilistIcons
+# Work In Progress
+Add cover art from Anilist as folder icons to your anime collection.
 
 ### How do I use this?
 
-- Download the executable from [here](https://github.com/notdedsec/anicon/releases)
+- Download the executable from [here](https:)
 - Run it in your anime folder
 - Choose when you're asked to
 - Repeat till all folders are processed
@@ -25,7 +26,7 @@ Your PC may take some time to index those icons. They should show up in 2 to 5 m
 ### Alright. It works but I'm curious as to how?
 It, uhhh
 - Gets the Anime Name from the Folder Name
-- Searches that name on MAL with Jikan API
+- Searches that name on Anilist with it's API
 - Asks you to choose the anime from results
 - Gets the artwork and converts it into an icon
 - Makes a `desktop.ini` file which sets the folder icon.
@@ -39,7 +40,3 @@ Yeah, the most efficient way to use this (imo) would be to:
 - Move out the incorrectly tagged folders and delete their icons
 - Run it in ManualMode and choose the correct results
 
-### I was promised memes. Gib memes.
-Alright here you go.
-
-![meme](https://i.imgur.com/BXX93Rs.jpg)
