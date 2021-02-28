@@ -1,4 +1,4 @@
-# AnilistIcons
+# Anicon for AniList
 # Work In Progress
 Add cover art from Anilist as folder icons to your anime collection.
 
