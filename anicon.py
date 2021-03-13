@@ -1,18 +1,19 @@
 from warnings import filterwarnings
 from PIL import Image, ImageOps
-from jikanpy import Jikan
-from requests import get
+##from jikanpy import Jikan
+import requests
 from time import sleep
 import re
 import os
+import json
 
 print('''Run this in your anime folder
-For help, info and memes, check out
-https://github.com/notdedsec/anicon
+For help and info, check out
+https://github.com/EnArvy/anicon
 ''')
 
 sleep(1)
-jikan = Jikan()
+##jikan = Jikan()
 filterwarnings("ignore")
 folderlist = next(os.walk('.'))[1]
 if folderlist is None or len(folderlist) == 0:
@@ -24,7 +25,7 @@ automode = True if input('Use AutoMode? Y/N : ').upper() == 'Y' else False
 def getname(name: str) -> str:
 
     lastwords = ['bd', 's0', '480p', '720p', '1080p']
-    wordstoremove = ['bluray', 'x265', 'x264', 'hevc', 'hi10p', 'avc', '10bit', 'dual', 'audio', 'eng', 'english', 'subbed', 'sub', 'dubbed', 'dub']
+    wordstoremove = ['bluray', 'x265', 'x264', 'hevc', 'hi10p', 'avc', '10bit', 'dual', 'audio', 'eng', 'english', 'subbed', ' sub ', 'dubbed', 'dub']
 
     name = name.lower().replace('_', ' ').replace('.', ' ')
     
@@ -42,7 +43,37 @@ def getname(name: str) -> str:
     return(name.strip())
 
 def getartwork(name: str) -> tuple:
-    
+
+    url="https://graphql.anilist.co"
+
+    query = '''
+            query($name:String){
+                Page{
+                    media(search:$name,format_not_in:[MANGA,ONE_SHOT]) {
+                        id
+                        type
+                        title {
+                            romaji
+                            english
+                        }
+                        coverImage {
+                            extraLarge
+                        }
+                    }
+                }
+            }      
+        '''
+    variables = {
+        'name':name
+    }
+    print(name)
+    results = requests.post(url,json={'query':query,'variables':variables})
+    print(results.content,"boob")
+    ##jsonobj = json.loads(results.content)
+    return(results.content['Page']['Media'][0]['coverImage']['extraLarge'] , results.content['Page']['Media'][0]['Type'])
+    ##return (jsonobj['data']['Media']['coverImage']['extraLarge'], jsonobj['data']['Media']['type'])
+ 
+'''   
     results = jikan.search('anime', name, parameters={'type': 'tv'})
 
     print('\n' + name.title(), end = '')
@@ -65,7 +96,7 @@ def getartwork(name: str) -> tuple:
             ch = 1
 
     return (results['results'][int(ch)-1]['image_url'], results['results'][int(ch)-1]['type'])
-
+'''
 def createicon(folder: str, link: str):
 
     art = get(link)
@@ -100,13 +131,16 @@ for folder in folderlist:
     jpgfile = folder + '\\' + iconname + '.jpg'
     icofile = folder + '\\' + iconname + '.ico'
     
-    if os.path.isfile(icofile):
-        print('An icon is already present. Delete the older icon and `desktop.ini` file before applying a new icon')
-        continue
+##    if os.path.isfile(icofile):
+##        print('An icon is already present. Delete the older icon and `desktop.ini` file before applying a new icon')
+##        continue
 
     link, Type = getartwork(name)
+
+    print(link)
+    print(Type)
     
-    try:
+'''    try:
         icon = createicon(folder, link)
     except:
         print('Ran into an error. Blame the dev :(')
@@ -129,3 +163,4 @@ for folder in folderlist:
     os.system('attrib +r \"{}\\{}\"'.format(os.getcwd(), folder))
     os.system('attrib +h \"{}\\desktop.ini\"'.format(folder))
     os.system('attrib +h \"{}\"'.format(icon))
+'''
