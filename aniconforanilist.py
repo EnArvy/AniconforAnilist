@@ -1,8 +1,7 @@
 from warnings import filterwarnings
 from PIL import Image, ImageOps
-##from jikanpy import Jikan
 import requests
-from time import sleep
+from requests import get
 import re
 import os
 import json
@@ -12,8 +11,7 @@ For help and info, check out
 https://github.com/EnArvy/anicon
 ''')
 
-sleep(1)
-##jikan = Jikan()
+
 filterwarnings("ignore")
 folderlist = next(os.walk('.'))[1]
 if folderlist is None or len(folderlist) == 0:
@@ -47,9 +45,9 @@ def getartwork(name: str) -> tuple:
     url="https://graphql.anilist.co"
 
     query = '''
-            query($name:String){
+            query($name:String)      {
                 Page{
-                    media(search:$name,format_not_in:[MANGA,ONE_SHOT]) {
+                    media(search:$name,format_not_in:[MANGA,ONE_SHOT,NOVEL,MUSIC]) {
                         id
                         type
                         title {
@@ -57,46 +55,31 @@ def getartwork(name: str) -> tuple:
                             english
                         }
                         coverImage {
-                            extraLarge
+                            medium
                         }
                     }
                 }
-            }      
+            }
         '''
     variables = {
         'name':name
     }
     print(name)
     results = requests.post(url,json={'query':query,'variables':variables})
-    print(results.content,"boob")
-    ##jsonobj = json.loads(results.content)
-    return(results.content['Page']['Media'][0]['coverImage']['extraLarge'] , results.content['Page']['Media'][0]['Type'])
-    ##return (jsonobj['data']['Media']['coverImage']['extraLarge'], jsonobj['data']['Media']['type'])
- 
-'''   
-    results = jikan.search('anime', name, parameters={'type': 'tv'})
-
-    print('\n' + name.title(), end = '')
-    counter = 1
-    for result in results['results']:
-        if automode:
-            print(' - ' + result['title'])
-            ch = 1
-            break
-        else:
-            print('\n' + str(counter) + ' - ' + result['title'], end = '')
-            
-        if counter == 5:
-            break
-        counter += 1
-
-    if not automode:
+    jsonobj = json.loads(results.content)
+    if automode:
+        return(jsonobj['data']['Page']['media'][0]['coverImage']['medium'],jsonobj['data']['Page']['media'][0]['type'])
+    else:  
+        counter = 1  
+        for id in jsonobj['data']['Page']['media']:
+            print(str(counter)+' - '+id['title']['romaji'])
+            counter = counter + 1
         ch = input('\n>')
         if ch == '':
             ch = 1
+        return(jsonobj['data']['Page']['media'][int(ch)-1]['coverImage']['medium'] , jsonobj['data']['Page']['media'][int(ch)-1]['type'])
+ 
 
-    return (results['results'][int(ch)-1]['image_url'], results['results'][int(ch)-1]['type'])
-'''
 def createicon(folder: str, link: str):
 
     art = get(link)
@@ -131,20 +114,16 @@ for folder in folderlist:
     jpgfile = folder + '\\' + iconname + '.jpg'
     icofile = folder + '\\' + iconname + '.ico'
     
-##    if os.path.isfile(icofile):
-##        print('An icon is already present. Delete the older icon and `desktop.ini` file before applying a new icon')
-##        continue
-
-    link, Type = getartwork(name)
-
-    print(link)
-    print(Type)
-    
-'''    try:
-        icon = createicon(folder, link)
-    except:
-        print('Ran into an error. Blame the dev :(')
+    if os.path.isfile(icofile):
+        print('An icon is already present. Delete the older icon and `desktop.ini` file before applying a new icon')
         continue
+   
+   # try:
+    link, Type = getartwork(name)
+    icon = createicon(folder, link)
+#    except:
+ #       print('Ran into an error. Blame the dev :(')
+  #      continue
 
     f = open(folder + "\\desktop.ini","w+")
     
@@ -163,4 +142,4 @@ for folder in folderlist:
     os.system('attrib +r \"{}\\{}\"'.format(os.getcwd(), folder))
     os.system('attrib +h \"{}\\desktop.ini\"'.format(folder))
     os.system('attrib +h \"{}\"'.format(icon))
-'''
+
