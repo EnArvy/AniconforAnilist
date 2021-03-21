@@ -117,13 +117,12 @@ for folder in folderlist:
     if os.path.isfile(icofile):
         print('An icon is already present. Delete the older icon and `desktop.ini` file before applying a new icon')
         continue
-   
-   # try:
-    link, Type = getartwork(name)
-    icon = createicon(folder, link)
-#    except:
- #       print('Ran into an error. Blame the dev :(')
-  #      continue
+    try:
+        link, Type = getartwork(name)
+        icon = createicon(folder, link)
+    except:
+        print('Ran into an error. Blame the dev :(')
+        continue
 
     f = open(folder + "\\desktop.ini","w+")
     
