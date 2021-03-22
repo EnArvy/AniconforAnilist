@@ -1,10 +1,10 @@
 # Anicon for AniList
-# Work In Progress
+
 Add cover art from Anilist as folder icons to your anime collection.
 
 ### How do I use this?
 
-- Download the executable from [here](https:)
+- Download the executable from [here](https://github.com/EnArvy/AniconforAnilist/releases)
 - Run it in your anime folder
 - Choose when you're asked to
 - Repeat till all folders are processed
@@ -22,6 +22,7 @@ If you're not using AutoMode, you can give a blank input when you're asked to ch
 
 ### Okay so i did everything, but the icons aren't showing up. (*panicks*)
 Your PC may take some time to index those icons. They should show up in 2 to 5 minutes. I guess.
+Note:Usually making chnages to files inside the folder makes icon appear(such as creating a new txt file or something).
 
 ### Alright. It works but I'm curious as to how?
 It, uhhh
@@ -39,4 +40,9 @@ Yeah, the most efficient way to use this (imo) would be to:
 - Run it in AutoMode first so all folders are processed
 - Move out the incorrectly tagged folders and delete their icons
 - Run it in ManualMode and choose the correct results
+
+## Building from source
+Requirements: python installed along with pillow(use `pip install pillow`) and pyinstaller(use `pip install pyinstaller`)
+
+Then in the directory run `pyinstaller aniconforanilist.py --onefile`
 

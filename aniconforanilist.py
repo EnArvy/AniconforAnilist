@@ -14,7 +14,7 @@ https://github.com/EnArvy/anicon
 
 filterwarnings("ignore")
 folderlist = next(os.walk('.'))[1]
-folderpath = os.path.dirname(os.path.realpath(__file__))
+
 if folderlist is None or len(folderlist) == 0:
     # In case the file is placed inside an inner most directory which contains only files and no other folders, this list will be empty.
     # Thus adding the current directory path as an element of the list.
@@ -128,9 +128,9 @@ for folder in folderlist:
 
     f = open(folder + "\\desktop.ini","w+")
     
-    icopath = folderpath + '\\' + icofile
+
     f.write("[.ShellClassInfo]\nConfirmFileOp=0\n")
-    f.write("IconResource={},0".format(icopath.strip("\\")))
+    f.write("IconResource={},0".format(icofile.replace(folder, "").strip("\\")))
     f.write("\nIconFile={}\nIconIndex=0".format(icofile.replace(folder, "").strip("\\")))
     f.write("\n[ViewState]\nMode=\nVid=\nFolderType=Videos")
     
