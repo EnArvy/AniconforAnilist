@@ -1,6 +1,7 @@
 # Anicon for AniList
 
 Add cover art from Anilist as folder icons to your anime collection.
+Forked from [here](https://github.com/notdedsec/anicon)
 
 ### How do I use this?
 
