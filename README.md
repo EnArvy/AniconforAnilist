@@ -48,7 +48,7 @@ Requirements: python installed along with pillow(use `pip install pillow`) and p
 Then in the directory run `pyinstaller aniconforanilist.py --onefile`
 
 ## Before
-![meme] (https://imgur.com/8iETrnE)
+![meme](https://i.imgur.com/BSbzy1F.png)
 ## After
-![meme] (https://imgur.com/undefined)
+![meme](https://i.imgur.com/IfVjJyz.png)
 
