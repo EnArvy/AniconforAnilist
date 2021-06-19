@@ -24,7 +24,7 @@ automode = True if input('Use AutoMode? Y/N : ').upper() == 'Y' else False
 def getname(name: str) -> str:
 
     lastwords = ['bd', 's0', '480p', '720p', '1080p']
-    wordstoremove = ['bluray', 'x265', 'x264', 'hevc', 'hi10p', 'avc', '10bit', 'dual', 'audio', 'eng', 'english', 'subbed', ' sub ', 'dubbed', 'dub']
+    wordstoremove = ['bluray', 'x265', 'x264', 'hevc', 'hi10p', 'avc', '10bit', 'dual', 'audio', 'eng', 'english', 'subbed', ' sub ', 'dubbed', 'dub','season']
 
     name = name.lower().replace('_', ' ').replace('.', ' ')
     
