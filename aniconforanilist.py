@@ -130,19 +130,20 @@ for folder in folderlist:
     
 
     f.write("[.ShellClassInfo]\nConfirmFileOp=0\n")
-    f.write("IconResource={},0".format(icofile.replace(folder, "").strip("\\")))
-    f.write("\nIconFile={}\nIconIndex=0".format(icofile.replace(folder, "").strip("\\")))
+    temp=(icofile.replace(folder, "").strip("\\"))
+    f.write(f"IconResource={temp},0")
+    f.write(f"\nIconFile={temp}\nIconIndex=0")
     f.write("\n[ViewState]\nMode=\nVid=\nFolderType=Videos")
     
     if Type is not None and len(Type) > 0:
         # If the result has a type, then using this as the infotip for the desktop icon.
-        f.write("\nInfoTip={}".format(Type))
+        f.write(f"\nInfoTip={Type}")
 
     # Closing the output stream. All the text will be written into `desktop.ini` file only when the output is being closed.
     f.close()
 
     # Not marking the `desktop.ini` file as a system file. This will make sure that the file can be seen if display hidden items is enabled.
-    os.system('attrib +r +s \"{}\\{}\"'.format(os.getcwd(), folder))
-    os.system('attrib +h \"{}\\desktop.ini\"'.format(folder))
-    os.system('attrib +h \"{}\"'.format(icon))
+    os.system(f'attrib +r +s \"{os.getcwd()}\\{folder}\"')
+    os.system(f'attrib +h \"{os.getcwd()}\\{folder}\\desktop.ini\"')
+    os.system(f'attrib +h \"{os.getcwd()}\\{icon}\"')
 
