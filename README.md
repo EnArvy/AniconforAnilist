@@ -1,6 +1,7 @@
 # Anicon for AniList
 
 Add cover art from Anilist as folder icons to your anime collection.
+Forked from [here](https://github.com/notdedsec/anicon)
 
 ### How do I use this?
 
@@ -45,4 +46,9 @@ Yeah, the most efficient way to use this (imo) would be to:
 Requirements: python installed along with pillow(use `pip install pillow`) and pyinstaller(use `pip install pyinstaller`)
 
 Then in the directory run `pyinstaller aniconforanilist.py --onefile`
+
+## Before
+![meme](https://i.imgur.com/BSbzy1F.png)
+## After
+![meme](https://i.imgur.com/IfVjJyz.png)
 
