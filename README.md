@@ -34,7 +34,7 @@ It, uhhh
 - Makes a `desktop.ini` file which sets the folder icon.
 
 ### I don't like these icons. How do i remove them?
-To remove the cover icon from a folder, you just need to delete the `.ico` and `desktop.ini ` file from the folder. These files are hidden so make sure you have `Show Hidden Items` option ticked. You can just search and delete them all if you wanna batch remove all icons. But why would you wanna do that anyway?
+To remove the cover icon from a folder, you just need to delete the `.ico` and `desktop.ini ` file from the folder. These files are hidden so you need to disable `Hide protected operating system files (Recommended)`. You can just search and delete them all if you wanna batch remove all icons.
 
 ### Any Tips or Suggestions?
 Yeah, the most efficient way to use this (imo) would be to:
