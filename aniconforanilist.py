@@ -113,7 +113,7 @@ if __name__ == '__main__':
         f.close()
 
         # Marking the `desktop.ini` file as a system file.
-        #Marking folder as read only and system as this is needed to show icons
+        # Marking folder as read only and system as this is needed to show icons
         os.system(f'attrib +r +s \"{os.getcwd()}\\{folder}\"')
         os.system(f'attrib +h +s \"{os.getcwd()}\\{folder}\\desktop.ini\"')
         os.system(f'attrib +h +s \"{os.getcwd()}\\{icon}\"')
