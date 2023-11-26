@@ -4,7 +4,7 @@ import os
 import json
 import aniparse
 
-def getartwork(name: str) -> tuple:
+def alsearch(name: str):
     url="https://graphql.anilist.co"
     query = '''
             query($name:String)      {
@@ -29,9 +29,21 @@ def getartwork(name: str) -> tuple:
     print(name)
     results = requests.post(url,json={'query':query,'variables':variables})
     jsonobj = json.loads(results.content)
+    return(jsonobj)
+
+def getartwork(name: str) -> tuple:
+    jsonobj = alsearch(name)
     if automode:
         return(jsonobj['data']['Page']['media'][0]['coverImage']['extraLarge'],jsonobj['data']['Page']['media'][0]['type'])
     else:  
+        if len(jsonobj['data']['Page']['media']) == 0:
+            print('No results found.')
+            custom = True if input('Try with custom name? Y/N : ').upper() == 'Y' else False
+            if custom:
+                custom = input('Enter custom name : ')
+                jsonobj = alsearch(custom)
+            else:
+                return(None,None)
         counter = 1  
         for id in jsonobj['data']['Page']['media']:
             print(str(counter)+' - '+id['title']['romaji'])
@@ -98,7 +110,7 @@ if __name__ == '__main__':
             link, Type = getartwork(name)
             icon = createicon(folder, link)
         except:
-            print('Ran into an error. Blame the dev :(')
+            print('Ran into an error. Try manual mode with custom input.')
             continue
 
         f = open(folder + "\\desktop.ini","w+")

@@ -1,4 +1,3 @@
-*.ico
 desktop.ini
 Makefile
 .vscode/
@@ -50,6 +49,7 @@ coverage.xml
 *.cover
 .hypothesis/
 .pytest_cache/
+test/
 
 # Translations
 *.mo
