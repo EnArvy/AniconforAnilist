@@ -115,7 +115,7 @@ if __name__ == '__main__':
 
         f = open(folder + "\\desktop.ini","w+")
         f.write("[.ShellClassInfo]\nConfirmFileOp=0\n")
-        f.write(f"IconResource={iconname}.ico,0")
+        f.write(f"IconResource={os.getcwd()}\\{folder}\\{iconname}.ico,0")
         f.write(f"\nIconFile={iconname}.ico\nIconIndex=0")
         f.write("\n[ViewState]\nMode=\nVid=\nFolderType=Videos")
         
@@ -124,7 +124,7 @@ if __name__ == '__main__':
             f.write(f"\nInfoTip={Type}")
         f.close()
 
-        # Marking the `desktop.ini` file as a system file.
+        # Marking icon and `desktop.ini` file as a system file.
         # Marking folder as read only and system as this is needed to show icons
         os.system(f'attrib +r +s \"{os.getcwd()}\\{folder}\"')
         os.system(f'attrib +h +s \"{os.getcwd()}\\{folder}\\desktop.ini\"')
